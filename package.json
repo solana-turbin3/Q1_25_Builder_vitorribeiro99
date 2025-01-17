@@ -7,7 +7,11 @@
     "keygen": "ts-node ./prereq/ts/prereq1/keygen.ts",
     "airdrop": "ts-node ./prereq/ts/prereq1/airdrop.ts",
     "transfer": "ts-node ./prereq/ts/prereq1/transfer.ts",
-    "enroll": "ts-node ./prereq/ts/prereq1/enroll.ts"
+    "enroll": "ts-node ./prereq/ts/prereq1/enroll.ts",
+    "spl_init": "ts-node ./spl/spl_init.ts",
+    "spl_metadata": "ts-node ./spl/spl_metadata.ts",
+    "spl_mint": "ts-node ./spl/spl_mint.ts",
+    "spl_transfer": "ts-node ./spl/spl_transfer.ts"
   },
   "license": "MIT",
   "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e",
@@ -15,6 +19,8 @@
     "@coral-xyz/anchor": "^0.30.1",
     "@metaplex-foundation/js": "^0.20.1",
     "@metaplex-foundation/mpl-token-metadata": "^3.3.0",
+    "@metaplex-foundation/umi": "^1.0.0",
+    "@metaplex-foundation/umi-bundle-defaults": "^1.0.0",
     "@solana/spl-token": "^0.4.9",
     "@solana/web3.js": "^1.98.0",
     "@types/node": "^22.10.7",

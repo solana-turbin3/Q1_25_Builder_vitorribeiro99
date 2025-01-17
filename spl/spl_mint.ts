@@ -1,3 +1,4 @@
+import { config } from "dotenv";
 import {
   Keypair,
   PublicKey,
@@ -6,19 +7,25 @@ import {
   LAMPORTS_PER_SOL,
 } from "@solana/web3.js";
 import { getOrCreateAssociatedTokenAccount, mintTo } from "@solana/spl-token";
-import wallet from "../../../Turbin3-wallet.json";
+import wallet from "../wallet/Turbin3-wallet.json";
+
+// Load environment variables
+config();
 
 // Import our keypair from the wallet file
 const keypair = Keypair.fromSecretKey(new Uint8Array(wallet));
 
 //Create a Solana devnet connection
 const commitment: Commitment = "confirmed";
-const connection = new Connection("https://api.devnet.solana.com", commitment);
+const connection = new Connection(
+  process.env.RPC_URL || "https://api.devnet.solana.com",
+  commitment
+);
 
 const token_decimals = 1_000_000n;
 
 // Mint address
-const mint = new PublicKey("BGqBAoWcURXFpRBxb1hxJxESfuGVowPZAoKBuEcw5WC");
+const mint = new PublicKey("D3meZbenDsK7GF1ZV9th3x5u1oSA8rFRc2FvQCDNoHeb");
 
 (async () => {
   try {
