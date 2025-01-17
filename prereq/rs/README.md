@@ -23,74 +23,74 @@
 
    Click "Run test" on VS Code or execute `cargo test keygen`
 
-1.3. Import/Export to Phantom
+   1.3. Import/Export to Phantom
 
-```rust
-    #[test]
-    fn base58_to_wallet(){
+   ```rust
+       #[test]
+       fn base58_to_wallet(){
 
-        println!("Input your private key as base58:");
-        let stdin = io::stdin();
-        let base58 = stdin.lock().lines().next().unwrap().unwrap();
-        println!("Your wallet file is:");
-        let wallet = bs58::decode(base58).into_vec().unwrap();
-        println!("{:?}", wallet);
+           println!("Input your private key as base58:");
+           let stdin = io::stdin();
+           let base58 = stdin.lock().lines().next().unwrap().unwrap();
+           println!("Your wallet file is:");
+           let wallet = bs58::decode(base58).into_vec().unwrap();
+           println!("{:?}", wallet);
+       }
 
-    }
+       #[test]
+       fn wallet_to_base58(){
 
-    #[test]
-    fn wallet_to_base58(){
+           println!("Input your private key as a wallet file byte array:");
+           let stdin = io::stdin();
+           let wallet = stdin.lock().lines().next().unwrap().unwrap().trim_start_matches('[').trim_end_matches(']').split(',').map(|s| s.trim().parse::<u8>().unwrap()).collect::<Vec<u8>>();
+           println!("Your private key is:");
+           let base58 = bs58::encode(wallet).into_string();
+           println!("{:?}", base58);
+       }
+   ```
 
-        println!("Input your private key as a wallet file byte array:");
-        let stdin = io::stdin();
-        let wallet = stdin.lock().lines().next().unwrap().unwrap().trim_start_matches('[').trim_end_matches(']').split(',').map(|s| s.trim().parse::<u8>().unwrap()).collect::<Vec<u8>>();
-        println!("Your private key is:");
-        let base58 = bs58::encode(wallet).into_string();
-        println!("{:?}", base58);
-```
+   Import Private Key on Phantom
 
-Import Private Key on Phantom
-
-![import_to_phantom](../../assets/importPhantom.png)
+   ![import_to_phantom](../../assets/importPhantom.png)
 
 2. Claim Token Airdrop
 
-`cargo add solana-client`
+   `cargo add solana-client`
 
-`cargo test airdrop`
+   `cargo test airdrop`
 
-Expected Result: https://solana.fm/tx/4jKsUpu28aWnExgJRivXjejGLeAtGjKHemtkMSdj734gsYTW3j6QvEVhJD1RPtP8e4B2AcgcMwRzE9GwQR1DQt1C?cluster=devnet-solana
+   Expected Result: https://solana.fm/tx/4jKsUpu28aWnExgJRivXjejGLeAtGjKHemtkMSdj734gsYTW3j6QvEVhJD1RPtP8e4B2AcgcMwRzE9GwQR1DQt1C?cluster=devnet-solana
 
 3. Transfer tokens to your Turbin3 Address
 
-`cargo add solana-program`
+   `cargo add solana-program`
 
-`cargo test transfer_sol`
+   `cargo test transfer_sol`
 
-Expected Result: https://explorer.solana.com/tx/2G2YZtLcQ9njRkBVPg8nVbtnESrsRwv4he8WtXAtKXRDesEHKj1HRNLr2HPihdSNczk1d4BQpiXiggKvFhaKHUXq?cluster=devnet
+   Expected Result: https://explorer.solana.com/tx/2G2YZtLcQ9njRkBVPg8nVbtnESrsRwv4he8WtXAtKXRDesEHKj1HRNLr2HPihdSNczk1d4BQpiXiggKvFhaKHUXq?cluster=devnet
 
 4. Empty devnet wallet into Turbin3 wallet
 
-`cargo test transfer_sol`
+   `cargo test transfer_sol`
 
-Expected Result: https://explorer.solana.com/tx/2G2YZtLcQ9njRkBVPg8nVbtnESrsRwv4he8WtXAtKXRDesEHKj1HRNLr2HPihdSNczk1d4BQpiXiggKvFhaKHUXq?cluster=devnet
+   Expected Result: https://explorer.solana.com/tx/2G2YZtLcQ9njRkBVPg8nVbtnESrsRwv4he8WtXAtKXRDesEHKj1HRNLr2HPihdSNczk1d4BQpiXiggKvFhaKHUXq?cluster=devnet
 
 5. Submit your completion of the Turbin3 pre-requisites program
 
-5.1. Consuming an IDL in Typescript
+   5.1. Consuming an IDL in Typescript
 
-![anchor_idl](../../assets/anchoridl.png)
+   ![anchor_idl](../../assets/anchoridl.png)
 
-5.2 Creating a PDA
+   5.2 Creating a PDA
 
-```rust
-// Create the PDA
-let prereq = Turbin3PrereqProgram::derive_program_address(&[b"prereq",signer.pubkey().to_bytes().as_ref()]);
-```
+   ```rust
+   // Create the PDA
+   let prereq = Turbin3PrereqProgram::derive_program_address(&[b"prereq",signer.pubkey().to_bytes().as_ref()]);
+   ```
 
-5.3 Putting it all together
+   5.3 Putting it all together
 
-`cargo test enroll`
+   `cargo test enroll`
 
-Expected Result:
-https://explorer.solana.com/tx/KJXPoKpWbMxQeyB4H2V2DyPKc6ieG25Gd8crnLvF7oKhfnzayWgXeWJ3ZeedZApNbT7jVYbkC2GMxuiRd8rsA3M?cluster=devnet
+   Expected Result:
+   https://explorer.solana.com/tx/KJXPoKpWbMxQeyB4H2V2DyPKc6ieG25Gd8crnLvF7oKhfnzayWgXeWJ3ZeedZApNbT7jVYbkC2GMxuiRd8rsA3M?cluster=devnet
