@@ -1,0 +1,25 @@
+{
+  "name": "q1_25_builder_vitorribeiro99",
+  "version": "1.0.0",
+  "description": "Proof of Work - vitorribeiro99 Turbin3",
+  "main": "index.js",
+  "scripts": {
+    "keygen": "ts-node ./prereq/ts/prereq1/keygen.ts",
+    "airdrop": "ts-node ./prereq/ts/prereq1/airdrop.ts",
+    "transfer": "ts-node ./prereq/ts/prereq1/transfer.ts",
+    "enroll": "ts-node ./prereq/ts/prereq1/enroll.ts"
+  },
+  "license": "MIT",
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e",
+  "dependencies": {
+    "@coral-xyz/anchor": "^0.30.1",
+    "@metaplex-foundation/js": "^0.20.1",
+    "@metaplex-foundation/mpl-token-metadata": "^3.3.0",
+    "@solana/spl-token": "^0.4.9",
+    "@solana/web3.js": "^1.98.0",
+    "@types/node": "^22.10.7",
+    "bs58": "^6.0.0",
+    "dotenv": "^16.4.7",
+    "typescript": "^5.7.3"
+  }
+}

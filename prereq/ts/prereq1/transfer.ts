@@ -1,3 +1,4 @@
+import { config } from "dotenv";
 import {
   Transaction,
   SystemProgram,
@@ -7,7 +8,10 @@ import {
   sendAndConfirmTransaction,
   PublicKey,
 } from "@solana/web3.js";
-import wallet from "./dev-wallet.json";
+import wallet from "../../../wallet/dev-wallet.json";
+
+// Load environment variables
+config();
 
 // Dev Wallet Keypair from the file
 const from = Keypair.fromSecretKey(new Uint8Array(wallet));
@@ -16,7 +20,7 @@ const from = Keypair.fromSecretKey(new Uint8Array(wallet));
 const to = new PublicKey("8ZkXfo2Mdv9StnXRVjF9UiMF8deA3Lrhd8qRHycojtB4");
 
 const connection = new Connection(
-  "https://yolo-dry-silence.solana-devnet.quiknode.pro/7a7c3810f80313da7bca8637ec638f2c1c70f213"
+  process.env.RPC_URL || "https://api.devnet.solana.com"
 );
 
 (async () => {

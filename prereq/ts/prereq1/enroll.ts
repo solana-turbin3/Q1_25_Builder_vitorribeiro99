@@ -1,12 +1,16 @@
+import { config } from "dotenv";
 import { Connection, Keypair, PublicKey } from "@solana/web3.js";
 import { Program, Wallet, AnchorProvider } from "@coral-xyz/anchor";
 import { IDL, Turbin3Prereq } from "./programs/Turbin3_prereq";
-import wallet from "./Turbin3-wallet.json";
+import wallet from "../../../wallet/Turbin3-wallet.json";
+
+// Load environment variables
+config();
 
 const keypair = Keypair.fromSecretKey(new Uint8Array(wallet));
 
 const connection = new Connection(
-  "https://yolo-dry-silence.solana-devnet.quiknode.pro/7a7c3810f80313da7bca8637ec638f2c1c70f213"
+  process.env.RPC_URL || "https://api.devnet.solana.com"
 );
 
 const github = Buffer.from("vitorribeiro99", "utf8");
