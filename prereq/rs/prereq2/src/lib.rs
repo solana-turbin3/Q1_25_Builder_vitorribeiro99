@@ -15,7 +15,7 @@ mod tests {
     use crate::programs::turbin3_prereq::{Turbin3PrereqProgram, CompleteArgs};
 
 
-    const RPC_URL: &str = "https://yolo-dry-silence.solana-devnet.quiknode.pro/7a7c3810f80313da7bca8637ec638f2c1c70f213";
+    const RPC_URL: &str = "https://api.devnet.solana.com";
     
     #[test]
     fn base58_to_wallet(){
@@ -55,7 +55,7 @@ mod tests {
         // Connected to Solana Devnet RPC Client
         let client = RpcClient::new(RPC_URL);
         // Claim 2 devnet SOL Tokens (2b lamports)
-        match client.request_airdrop(&keypair.pubkey(), 2_000_000_000u64){
+        match client.request_airdrop(&keypair.pubkey(), 1_000_000_000u64){
             Ok(s) => {
                 println!("Success! Check out your TX here:");
                 println!("https://explorer.solana.com/tx/{}?cluster=devnet", s.to_string());
