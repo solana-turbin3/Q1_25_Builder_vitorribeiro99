@@ -8,7 +8,6 @@ use crate::Escrow;
 pub struct Take<'info>{
     #[account(mut)]
     pub taker: Signer<'info>,
-    #[account(mut)]
     pub maker: SystemAccount<'info>,
     pub mint_a: InterfaceAccount<'info, Mint>,
     pub mint_b: InterfaceAccount<'info, Mint>,
@@ -18,13 +17,13 @@ pub struct Take<'info>{
         associated_token::mint = mint_a,
         associated_token::authority = taker,
     )]
-    pub taker_ata_a: Box<InterfaceAccount<'info, TokenAccount>>,
+    pub taker_ata_a: InterfaceAccount<'info, TokenAccount>,
     #[account(
         mut,
         associated_token::mint = mint_b,
         associated_token::authority = taker,
     )]
-    pub taker_ata_b: Box<InterfaceAccount<'info, TokenAccount>>,
+    pub taker_ata_b: InterfaceAccount<'info, TokenAccount>,
     #[account(
         init_if_needed,
         payer = taker,
@@ -54,7 +53,7 @@ pub struct Take<'info>{
 }
 
 impl<'info> Take<'info> {
-    pub fn deposit_to_maker(&self)-> Result<()> {
+    pub fn deposit(&self)-> Result<()> {
         let cpi_program = self.token_program.to_account_info();
         let ctx_accounts = TransferChecked{
             from: self.taker_ata_b.to_account_info(),
@@ -74,7 +73,7 @@ impl<'info> Take<'info> {
         let cpi_accounts = TransferChecked{
             from: self.vault.to_account_info(),
             to: self.taker_ata_a.to_account_info(),
-            authority: self.taker.to_account_info(),
+            authority: self.escrow.to_account_info(),
             mint: self.mint_a.to_account_info(),
         };
 
@@ -98,7 +97,7 @@ impl<'info> Take<'info> {
 
         let cpi_accounts = CloseAccount{
             account: self.vault.to_account_info(),
-            destination: self.maker.to_account_info(),
+            destination: self.maker.to_account_info(), // is the one that oppened the account
             authority: self.escrow.to_account_info(),
         };
 

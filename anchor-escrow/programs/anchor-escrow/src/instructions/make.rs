@@ -48,7 +48,7 @@ impl<'info> Make<'info> {
             mint_b: self.mint_b.key(),
             receive_amount,
             bump: bumps.escrow,
-        });
+        }); 
 
         Ok(())
     }
